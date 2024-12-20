@@ -1,0 +1,49 @@
+def get_candidate_details():
+    name = input("Enter candidate name: ")
+    age = int(input("Enter candidate age: "))
+    qualification = input("Enter candidate qualification (e.g., Bachelor's Degree): ")
+    experience = int(input("Enter candidate years of experience: "))
+    return {
+        "name": name,
+        "age": age,
+        "qualification": qualification,
+        "experience": experience,
+    }
+
+def check_candidate_eligibility(candidate):
+    min_age = 21
+    required_qualification = "Bachelor's Degree"
+    min_experience = 2
+
+    if (candidate["age"] >= min_age and
+        candidate["qualification"].lower() == required_qualification.lower() and
+        candidate["experience"] >= min_experience):
+        return True
+    return False
+
+def evaluate_candidates():
+    num_candidates = int(input("How many candidates are being evaluated? "))
+
+    shortlisted = []
+    rejected = []
+
+    for _ in range(num_candidates):
+        print("\nEnter details for the candidate:")
+        candidate = get_candidate_details()
+
+        if check_candidate_eligibility(candidate):
+            shortlisted.append(candidate)
+        else:
+            rejected.append(candidate)
+
+    print("\nEvaluation Results:")
+    print("Shortlisted Candidates:")
+    for s in shortlisted:
+        print(f"- {s['name']} (Age: {s['age']}, Qualification: {s['qualification']}, Experience: {s['experience']} years)")
+
+    print("\nRejected Candidates:")
+    for r in rejected:
+        print(f"- {r['name']} (Age: {r['age']}, Qualification: {r['qualification']}, Experience: {r['experience']} years)")
+
+if __name__ == "__main__":
+    evaluate_candidates()
